@@ -23,7 +23,7 @@ module ThinkingSphinx
 
       # compatibilty with multi_db
       if @model.connection.class.to_s == "MultiDb::ConnectionProxy"
-        @database_configuration = @model.connection.next_reader!.retrieve_connection.instance_variable_get(:@config).clone
+        @database_configuration = @model.connection.slave.retrieve_connection.instance_variable_get(:@config).clone
       else
         @database_configuration = @model.connection.instance_variable_get(:@config).clone
       end
